@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -14,6 +15,9 @@ class UserTableSeeder extends Seeder
         	'name' => 'Bhargav Raviya', 
         	'email' => 'admin@rajtechnologies.com',
         	'password' => bcrypt('123456789')
+        ]);
+        $profile = Profile::create([
+        	'user_id' => $user->id, 
         ]);
         $role = Role::create(['name' => 'Admin']);
         $permissions = Permission::pluck('id','id')->all();

@@ -11,14 +11,16 @@
         <!-- Sidebar user panel (optional) -->
         @guest
         @else
+            <a href="{{ route('profile.index') }}">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <!-- <div class="image">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div> -->
+                <div class="image">
+                        <img src="{{ Auth::user()->profile->image }}" class="img-circle elevation-2" alt="{{ Auth::user()->name }}">
+                    </div>
                 <div class="info">
                     <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                 </div>
             </div>
+            </a>
         @endguest
 
 
@@ -49,15 +51,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Widgets
-                            <span class="right badge badge-danger">New</span>
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
@@ -68,7 +61,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html" class="nav-link">
+                            <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List</p>
                             </a>
@@ -97,9 +90,7 @@
                         </form>
                     </li>
                 @endguest
-
-
-
+                
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

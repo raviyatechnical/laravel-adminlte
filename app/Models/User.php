@@ -44,4 +44,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-}
+    //Profile Create , Update and Delete
+    static function profileCreate()
+    {
+
+    }
+    //Relationships
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+}   

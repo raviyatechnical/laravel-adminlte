@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Auth::routes();
 Route::group(['prefix' => 'admin','name' => 'admin','middleware' => ['auth']], function() {
     // Route::resource('roles','UserManagement\RoleController');
     Route::resource('users', UserController::class);
+    Route::get('profile',[ProfileController::class, 'index'])->name('profile.index');
+    Route::get('profile/edit',[ProfileController::class, 'edit'])->name('profile.edit');
 });
 
 
