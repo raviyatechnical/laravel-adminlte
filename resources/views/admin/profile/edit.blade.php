@@ -24,11 +24,13 @@
             <h3 class="card-title">Profile Edit</h3>
         </div><!-- /.card-header -->
         <div class="card-body">
-            <form class="form-horizontal">
+            <x-alert />
+            <form class="form-horizontal" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputName" value="{{ $user->name }}" placeholder="Name">
+                        <input type="text" name="name" class="form-control" id="inputName" value="{{ $user->name }}" placeholder="Name">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -37,6 +39,13 @@
                         <input type="email" class="form-control" id="inputEmail" value="{{ $user->email }}" placeholder="Email" readonly>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Image</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="image" class="form-control">
+                    </div>
+                </div>
+                
                 <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
                         <button type="submit" class="btn btn-danger">Submit</button>

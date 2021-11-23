@@ -12,6 +12,14 @@ use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:user-create', ['only' => ['create','store']]);
+         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+
+    }
     public function index(Request $request)
     {
         $data = User    ::orderBy('id','DESC')->paginate(5);
@@ -31,16 +39,10 @@ class UserController extends Controller
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
-
-
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-
-
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-
-
         return redirect()->route('users.index')
                         ->with('success','User created successfully');
     }
@@ -54,61 +56,32 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-
-
         return view('admin.users.edit',compact('user','roles','userRole'));
     }
  	public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            //'password' => 'same:confirm-password',
+            //'email' => 'required|email|unique:users,email,'.$id,
             'roles' => 'required'
         ]);
-
-
         $input = $request->all();
-        // if(!empty($input['password'])){ 
-        //     $input['password'] = Hash::make($input['password']);
-        // }else{
-        //     $input = array_except($input,array('password'));    
-        // }
-
-
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
-
-
         $user->assignRole($request->input('roles'));
-
-
         return redirect()->route('users.index')
                         ->with('success','User updated successfully');
     }
   	public function destroy($id)
     {
-        User::find($id)->delete();
+        $user = User::findOrFail($id);
+        if($user){
+            $user->delete();
+            $user->profile->delete();
+        }       
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }
-    // public function sendNotification()
-    // {
-    //     $user = User::first();
-  
-    //     $details = [
-    //         'greeting' => 'Hi Artisan',
-    //         'body' => 'This is my first notification from RajTechnologies.com',
-    //         'thanks' => 'Thank you for using RajTechnologies.com tuto!',
-    //         'actionText' => 'View My Site',
-    //         'actionURL' => url('/'),
-    //         'order_id' => 101
-    //     ];
-  
-    //     Notification::send($user, new UserNotification($details));
-   
-    //     dd('done');
-    // }
-
+    
 }

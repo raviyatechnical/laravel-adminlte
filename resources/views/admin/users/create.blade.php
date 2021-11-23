@@ -24,6 +24,7 @@
             <h3 class="card-title">Create User</h3>
         </div>
         <form action="{{ route('users.store') }}" method="POST">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label>Name</label>

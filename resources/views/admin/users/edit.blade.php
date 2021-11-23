@@ -23,7 +23,9 @@
         <div class="card-header">
             <h3 class="card-title">Edit User</h3>
         </div>
-        <form action="{{ route('users.update',$user->id) }}" method="PATCH">
+        <form action="{{ route('users.update',$user->id) }}" method="POST">
+            @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-group">
                     <label>Name</label>
@@ -31,13 +33,13 @@
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input class="form-control" type="text" name="email" value="{{ $user->email }}" placeholder="Email">
+                    <input class="form-control" type="text" value="{{ $user->email }}" placeholder="Email" readonly>
                 </div>
                 <div class="form-group">
                     <label>Role:</label>
                     <select class="form-control" name="roles[]" multiple>
                         @foreach($roles as $key => $value)
-                            <option value="{{ $key }}">
+                            <option value="{{ $key }}" @if($user->hasRole($key)) selected @endif>
                                 {{ $value }}
                             </option>
                         @endforeach

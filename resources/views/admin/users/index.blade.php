@@ -17,15 +17,15 @@
 </div>
 @endsection
 @section('content')
-
+<x-alert />
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Bordered Table</h3>
+            <h3 class="card-title">Bordered Table</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <table class="table table-bordered">
+            <table class="table table-bordered">
                 <tr>
                     <th>No</th>
                     <th>Name</th>
@@ -34,7 +34,7 @@
                     <th width="280px">Action</th>
                 </tr>
                 @foreach($data as $key => $user)
-                    <tr>
+                    <tr id="user-{{ $user->id }}" data-id="{{ $user->id }}">
                         <td>{{ ++$i }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
@@ -46,12 +46,15 @@
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-                            <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-                            <form action="{{ route('users.destroy',$user->id) }}" method="DELETE"
+                            <a class="btn btn-info"
+                                href="{{ route('users.show',$user->id) }}">Show</a>
+                            <a class="btn btn-primary"
+                                href="{{ route('users.edit',$user->id) }}">Edit</a>
+                            <button class="btn btn-danger deleteRecord" >Delete Record</button>
+                            <!-- <form action="{{ route('users.destroy',$user->id) }}" method="DELETE"
                                 style="display:inline">
                                 <input class="btn btn-danger" type="submit" name="Delete" value="Delete">
-                            </form>
+                            </form> -->
                         </td>
                     </tr>
                 @endforeach
@@ -61,6 +64,26 @@
         <div class="card-footer clearfix">
             {!! $data->render() !!}
         </div>
-      </div>
+    </div>
 </div>
+@endsection
+@section('script')
+<script>
+    $(".deleteRecord").click(function () {
+        var id = $(this).closest('tr').data("id");
+        var token = $("meta[name='csrf-token']").attr("content");
+        $.ajax(
+            {
+                url: "users/" + id,
+                type: 'DELETE',
+                data: {
+                    "id": id,
+                    "_token": token,
+                },
+                success: function () {
+                    $('#user-'+id).remove();
+                }
+            });
+    });
+</script>
 @endsection

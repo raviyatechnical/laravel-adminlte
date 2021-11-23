@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin','name' => 'admin','middleware' => ['auth']], f
     Route::resource('users', UserController::class);
     Route::get('profile',[ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/edit',[ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('profile/edit',[ProfileController::class, 'update'])->name('profile.update');
 });
 
 

@@ -10,7 +10,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v1</li>
+                    <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </div>
         </div>
@@ -24,6 +24,10 @@
 {{ session('status') }}
 </div>
 @endif
-
-{{ __('You are logged in!') }}
+@if($user->hasRole('User'))
+{{ __('You are logged in User!') }}
+@endif
+@if($user->hasRole('Admin'))
+{{ __('You are logged in Admin!') }}
+@endif
 @endsection

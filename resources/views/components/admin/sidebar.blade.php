@@ -17,7 +17,7 @@
                         <img src="{{ Auth::user()->profile->image }}" class="img-circle elevation-2" alt="{{ Auth::user()->name }}">
                     </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                    <span class="d-block">{{ Auth::user()->name }}</span>
                 </div>
             </div>
             </a>
@@ -50,6 +50,7 @@
                         </p>
                     </a>
                 </li>
+                @can('user-list','user-create')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
@@ -60,20 +61,25 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('user-list')
                         <li class="nav-item">
                             <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List</p>
                             </a>
                         </li>
+                        @endcan
+                        @can('user-create')
                         <li class="nav-item">
                             <a href="{{ route('users.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create New User</p>
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
+                @endcan
                 @guest
                 @else
                     <li class="nav-item">
