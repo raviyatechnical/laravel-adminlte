@@ -28,7 +28,7 @@ class ProfileController extends Controller
         ]);
         $user = Auth::user();
         
-        if($request->has('image')){
+        if($request->hasFile('image')){
             $imageName = time().'.'.$request->image->extension();
             $request->image->move(public_path('uploads/images'), $imageName);
         }

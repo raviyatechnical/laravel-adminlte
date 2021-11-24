@@ -34,12 +34,7 @@ class UserTableSeeder extends Seeder
         	'user_id' => $user->id, 
         ]);
         $role = Role::create(['name' => 'User']);
-        $permissions = [
-            "profile-create" => 2,
-            "profile-delete" => 4,
-            "profile-edit" => 3,
-            "profile-list" => 1,
-        ];
+        $permissions = Permission::pluck('id','id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
         

@@ -24,6 +24,7 @@
 {{ session('status') }}
 </div>
 @endif
+
 @if($user->hasRole('User'))
 {{ __('You are logged in User!') }}
 @endif
