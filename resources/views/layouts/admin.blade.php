@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset_admin('plugins/fontawesome-free/css/all.min.css') }}">
+    <script src="https://kit.fontawesome.com/9378912063.js" crossorigin="anonymous"></script>
     <!-- icheck bootstrap -->
     <link rel="stylesheet"
         href="{{ asset_admin('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
@@ -27,6 +28,11 @@
 
     <!-- Styles -->
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <!-- var -->
+    <script>
+        base_url = "{{ env('APP_URL') }}";
+    </script>
+    @yield('head')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

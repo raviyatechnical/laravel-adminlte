@@ -13,17 +13,18 @@ class Profile extends Model
         'user_id',
         'image'
     ];
+    //Relationships
     public function user()
     {
         return $this->belongsTo(User::class);
     }
     //Attribute
     public function getImageAttribute($value)
-{
-    if ($value) {
-        return asset('uploads/images/'.$value);
-    } else {
-        return asset('admin\images\default\avatar.jpg');
+    {
+        if ($value) {
+            return asset('uploads/images/'.$value);
+        } else {
+            return asset('admin\images\default\avatar.jpg');
+        }
     }
-}
 }

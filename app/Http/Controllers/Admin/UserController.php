@@ -48,7 +48,7 @@ class UserController extends Controller
     }
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::with('company')->find($id);
         return view('admin.users.show',compact('user'));
     }
     public function edit($id)
@@ -83,5 +83,6 @@ class UserController extends Controller
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }
+    
     
 }
