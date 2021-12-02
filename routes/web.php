@@ -30,6 +30,4 @@ Route::group(['prefix' => 'admin','name' => 'admin','middleware' => ['auth']], f
     Route::post('profile/edit',[ProfileController::class, 'update'])->name('profile.update');
 });
 
-Route::resource('products', ProductController::class);
-Route::resource('category', CategoryController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
