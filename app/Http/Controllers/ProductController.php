@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
     // function __construct()
     // {
     //      $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);

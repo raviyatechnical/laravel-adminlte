@@ -72,18 +72,21 @@
     $(".deleteRecord").click(function () {
         var id = $(this).closest('tr').data("id");
         var token = $("meta[name='csrf-token']").attr("content");
+        console.log(id);
+        console.log(token);
         $.ajax(
-            {
-                url: "users/" + id,
-                type: 'DELETE',
-                data: {
-                    "id": id,
-                    "_token": token,
-                },
-                success: function () {
-                    $('#user-'+id).remove();
-                }
-            });
+        {
+            url: base_url + "admin/users/" + id,
+            type: 'POST',
+            data: {
+                "id": id,
+                "_token": token,
+                "_method": "DELETE"
+            },
+            success: function () {
+                $('#user-'+id).remove();
+            }
+        });
     });
 </script>
 @endsection
