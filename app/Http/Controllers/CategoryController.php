@@ -16,6 +16,10 @@ class CategoryController extends Controller
     //      $this->middleware('permission:product-delete', ['only' => ['destroy']]);
 
     // }
+    function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
     public function index(Request $request)
     {
         $user = Auth::user();

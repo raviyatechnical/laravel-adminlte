@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
     public function index(Request $request)
     {
         $user = Auth::user();

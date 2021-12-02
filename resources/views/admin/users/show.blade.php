@@ -40,8 +40,5 @@
             @endif
         </div>
     </div>
-    @php
-        dd($user->company);
-    @endphp
 </div>
 @endsection
