@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,6 @@ Route::group(['prefix' => 'admin','name' => 'admin','middleware' => ['auth']], f
     Route::get('profile/edit',[ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile/edit',[ProfileController::class, 'update'])->name('profile.update');
 });
+Route::get('/index', [StripeController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

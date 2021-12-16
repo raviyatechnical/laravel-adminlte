@@ -18,6 +18,11 @@
 </div>
 @endsection
 @section('content')
+
+
+
+
+
 {{ __('Dashboard') }}
 @if (session('status'))
 <div class="alert alert-success" role="alert">
@@ -25,10 +30,17 @@
 </div>
 @endif
 
+
 @if($user->hasRole('User'))
 {{ __('You are logged in User!') }}
 @endif
 @if($user->hasRole('Admin'))
 {{ __('You are logged in Admin!') }}
 @endif
+<iframe src="https://player.vimeo.com/video/651386804"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+
+<livewire:counter /> 
 @endsection

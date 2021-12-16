@@ -12,8 +12,10 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "livewire/livewire": "^2.8",
         "rajtechnologies/laravel-tools": "dev-master",
-        "spatie/laravel-permission": "^5.4"
+        "spatie/laravel-permission": "^5.4",
+        "stripe/stripe-php": "^7.104"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -177,6 +177,7 @@ return [
         //Custom
         App\Providers\HelperServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        
     ],
 
     /*
